@@ -8,14 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="shoes")
+@Table
 public class Shoe {
 	
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
     
-    @Column(name="shoe_color", nullable = false)
+    @Column
 	String color;
     
 	int size;
@@ -32,6 +32,10 @@ public class Shoe {
 		return id;
 	}
 
+	public void setId(long id){
+		this.id = id;
+		
+	}
 	public String getColor() {
 		return color;
 	}
@@ -49,6 +53,13 @@ public class Shoe {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	@Override
+	public String toString() {
+		return "Shoe [id=" + id + ", color=" + color + ", size=" + size + "]";
 	}	
+	
+	
 	
 }

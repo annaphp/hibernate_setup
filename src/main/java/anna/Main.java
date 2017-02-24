@@ -25,14 +25,39 @@ public class Main {
 		s.close();	
 		return id;
 	}
-
+	
+	
+	  public static void update(Shoe shoe) {
+	        Session session = sessionFactory.openSession();
+	        session.beginTransaction();
+	        session.update(shoe);
+	        session.getTransaction().commit();
+	        session.close();
+	}
+	
+     public static Shoe findShoeById(long id) {
+        Session session = sessionFactory.openSession();
+        Shoe shoe = session.get(Shoe.class,id);
+        session.close();
+        return shoe;
+}
 	
 	public static void main(String[] args) {
 	
 		Shoe shoe = new Shoe("White", 34);
-		System.out.println(save(shoe));
-		Shoe blue = new Shoe("Blue", 35);
-		System.out.println(save(blue));
+	    long id = (long)save(shoe);
+	    System.out.println(id);
+	    Shoe sh = findShoeById(id);
+	    System.out.println(sh);
+	    sh.setColor("pink");
+	    update(sh);
+	    Shoe afterUpdate = findShoeById(id);
+	    System.out.println(afterUpdate);
+		
+
+		
+	 
+		
 
 	}
 
